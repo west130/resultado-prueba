@@ -1,3 +1,5 @@
+Se realizo lo necesario para la prueba cumpliendo los requerimientos de interaccion con el usuario.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
