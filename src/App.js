@@ -43,26 +43,43 @@ const useStyles = makeStyles({
 
 
 function App() {
-
+ 
   const classes = useStyles();
   const [like, setLike] = useState(0);
   const [dislike, setDislike] = useState(0);
   const [voto, setVoto] = useState(false);
   const [total, setTotal] = useState(0);
+  
+
   let domi
   function setVotoLike(select){
+   
     if(select==1){
       setLike(like+1)
       setVoto(true)
       setTotal(total+1)
+      localStorage.setItem("datos", JSON.stringify({
+        "__like": like+1,
+        "__total": total+1,
+        "__dislike": dislike
+      })) 
+
     }else{
       setDislike(dislike+1)
       setVoto(true)
       setTotal(total+1)
+      localStorage.setItem("datos", JSON.stringify({
+        "__like": like,
+        "__total": total+1,
+        "__dislike": dislike+1
+      })) 
     }
+  
+
+
 
   }
- 
+
   let card_select = ()=> {
 
     if (voto == false) {
@@ -119,17 +136,19 @@ function App() {
     }
   }
   useEffect(() => {
-    // Actualiza el título del documento usando la Browser API
-    data()
-    
+    if(localStorage.datos){
+      let datacenter = JSON.parse(localStorage.datos)
+      setLike(datacenter.__like)
+      setTotal(datacenter.__total)
+      setDislike(datacenter.__dislike)
+    }
 
-  });
+
+  },[]);
 
   card_select()
 
-  let data = () => {
-
-  }
+ 
 
   return (
     <div className={classes.App}>
